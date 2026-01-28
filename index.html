@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 2 Months! ❤️</title>
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #4a4e69;
+            --accent-blue: #bde0fe;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, #ffc8dd, #ffafcc, #bde0fe, #a2d2ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 85%;
+            max-width: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .card.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .gif-box img {
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #d81b60;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            margin-bottom: 1rem;
+            font-family: 'Georgia', serif;
+        }
+
+        p {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            flex: 1;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover { background: #ff758f; }
+
+        .floating-emoji {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            font-size: 2rem;
+            animation: floatAway 2.5s ease-out forwards;
+        }
+
+        @keyframes floatAway {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card active" id="page1">
+    <div class="gif-box">
+        <img src="30015.gif" alt="Happy 2 Months">
+    </div>
+    <h1>Happy 2 Months! ❤️</h1>
+    <p>I can't believe it's already been 60 days since we started this journey together...</p>
+    <button class="nav-btn" onclick="nextPage(2)">Next ✨</button>
+</div>
+
+<div class="card" id="page2">
+    <div class="gif-box">
+        <img src="30010.gif" alt="For You">
+    </div>
+    <h1>Everything is Better...</h1>
+    <p>From our inside jokes to the quiet moments, every second with you is my favorite. Thank you for being you.</p>
+    <div class="btn-container">
+        <button class="nav-btn" style="background: #ccc;" onclick="nextPage(1)">Back</button>
+        <button class="nav-btn" onclick="nextPage(3)">One last thing... 💖</button>
+    </div>
+</div>
+
+<div class="card" id="page3">
+    <div class="gif-box">
+        <img src="30024.gif" alt="I Love You">
+    </div>
+    <h1>To my whole heart,</h1>
+    <p style="font-size: 1.5rem; font-weight: bold; color: #d81b60;">I LOVE YOU! 🥰</p>
+    <button class="nav-btn" onclick="celebrate()">Click for a Surprise! 🌸</button>
+</div>
+
+<script>
+    function nextPage(pageNum) {
+        document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
+        document.getElementById('page' + pageNum).classList.add('active');
+    }
+
+    function celebrate() {
+        const items = ['❤️', '💖', '💐', '✨', '🌸', '💙', '🐱', '🌹', '🥰'];
+        for (let i = 0; i < 40; i++) {
+            const el = document.createElement('div');
+            el.className = 'floating-emoji';
+            el.innerHTML = items[Math.floor(Math.random() * items.length)];
+            const x = (Math.random() - 0.5) * window.innerWidth * 1.5;
+            const y = (Math.random() - 0.8) * window.innerHeight * 1.5;
+            el.style.setProperty('--x', `${x}px`);
+            el.style.setProperty('--y', `${y}px`);
+            el.style.left = '50%';
+            el.style.top = '50%';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 2500);
+        }
+    }
+</script>
+
+</body>
+</html>
